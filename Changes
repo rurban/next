@@ -1,5 +1,9 @@
 Revision history for Perl extension NEXT.pm.
 
+0.66 2016-07-20 NEILB
+    - split the "package EVERY" statement across two lines to hide it
+      from PAUSE and help with resolving a permissions conflict with "Every".
+
 0.65    Mon Sep 20 03:32:46 2010
     - Remove unnecessary test boilerplate that caused trouble in the perl core.
 

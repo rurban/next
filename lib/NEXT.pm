@@ -1,5 +1,5 @@
 package NEXT;
-$VERSION = '0.65';
+$VERSION = '0.66';
 use Carp;
 use strict;
 use overload ();
@@ -108,7 +108,8 @@ package NEXT::ACTUAL::DISTINCT;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();
 package NEXT::UNSEEN::ACTUAL;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();
 package NEXT::DISTINCT::ACTUAL;	@ISA = 'NEXT'; NEXT::ELSEWHERE::buildAUTOLOAD();
 
-package EVERY;
+package
+    EVERY;
 
 sub EVERY::ELSEWHERE::buildAUTOLOAD {
     my $autoload_name = caller() . '::AUTOLOAD';
@@ -182,7 +183,8 @@ sub EVERY::ELSEWHERE::buildAUTOLOAD {
 }
 
 package EVERY::LAST;   @ISA = 'EVERY';   EVERY::ELSEWHERE::buildAUTOLOAD();
-package EVERY;         @ISA = 'NEXT';    EVERY::ELSEWHERE::buildAUTOLOAD();
+package
+    EVERY;             @ISA = 'NEXT';    EVERY::ELSEWHERE::buildAUTOLOAD();
 
 1;
 
