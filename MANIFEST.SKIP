@@ -6,3 +6,5 @@ blib\b
 ^Makefile.old$
 ^Debian
 ^NEXT-
+MYMETA.json
+MYMETA.yml
