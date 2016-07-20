@@ -1,7 +1,8 @@
 package NEXT;
-$VERSION = '0.66';
+$VERSION = '0.66_01';
 use Carp;
 use strict;
+use warnings;
 use overload ();
 
 sub NEXT::ELSEWHERE::ancestors
@@ -192,8 +193,7 @@ __END__
 
 =head1 NAME
 
-NEXT.pm - Provide a pseudo-class NEXT (et al) that allows method redispatch
-
+NEXT - Provide a pseudo-class NEXT (et al) that allows method redispatch
 
 =head1 SYNOPSIS
 
@@ -386,7 +386,7 @@ previous example were rewritten:
         E->foo();
 
 then it would print:
-        
+
         called E::foo
         called C::foo
         called A::foo
