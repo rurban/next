@@ -4,6 +4,7 @@ Revision history for Perl extension NEXT.pm
     - Changed class names in SYNOPSIS from A, B, C, D to P, Q, R, S.
       This is avoid potential clash with core B:: namespace. RT#9734
       I didn't change the later examples in the doc, as I think they're ok.
+    - Added mentions of next::method in the core "mro" module.
     - Changed all mentions of "NEXT.pm" in the doc to C<NEXT>.
 
 0.66 2016-07-28 NEILB

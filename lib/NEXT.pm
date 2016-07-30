@@ -238,6 +238,11 @@ The C<NEXT> module adds a pseudoclass named C<NEXT> to any program
 that uses it. If a method C<m> calls C<$self-E<gt>NEXT::m()>, the call to
 C<m> is redispatched as if the calling method had not originally been found.
 
+B<Note:> before using this module,
+you should look at L<next::method|https://metacpan.org/pod/mro#next::method>
+in the core L<mro> module.
+C<mro> has been a core module since Perl 5.9.5.
+
 In other words, a call to C<$self-E<gt>NEXT::m()> resumes the depth-first,
 left-to-right search of C<$self>'s class hierarchy that resulted in the
 original call to C<m>.
@@ -544,6 +549,11 @@ behaviour simply adds its own C<Init> method (I<not> a C<new> method),
 which the call to C<EVERY::LAST::Init> in the inherited constructor
 then correctly picks up.
 
+=head1 SEE ALSO
+
+L<mro>
+(in particular L<next::method|https://metacpan.org/pod/mro#next::method>),
+which has been a core module since Perl 5.9.5.
 
 =head1 AUTHOR
 
