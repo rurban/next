@@ -1,9 +1,11 @@
 package NEXT;
-$VERSION = '0.66';
+
 use Carp;
 use strict;
 use warnings;
 use overload ();
+
+our $VERSION = '0.67';
 
 sub NEXT::ELSEWHERE::ancestors
 {
@@ -232,7 +234,7 @@ NEXT - Provide a pseudo-class NEXT (et al) that allows method redispatch
 
 =head1 DESCRIPTION
 
-NEXT.pm adds a pseudoclass named C<NEXT> to any program
+The C<NEXT> module adds a pseudoclass named C<NEXT> to any program
 that uses it. If a method C<m> calls C<$self-E<gt>NEXT::m()>, the call to
 C<m> is redispatched as if the calling method had not originally been found.
 
@@ -412,7 +414,7 @@ C<NEXT::UNSEEN> instead of C<NEXT::DISTINCT>.
 
 =head2 Invoking all versions of a method with a single call
 
-Yet another pseudo-class that NEXT.pm provides is C<EVERY>.
+Yet another pseudo-class that C<NEXT> provides is C<EVERY>.
 Its behaviour is considerably simpler than that of the C<NEXT> family.
 A call to:
 
@@ -549,7 +551,7 @@ Damian Conway (damian@conway.org)
 
 =head1 BUGS AND IRRITATIONS
 
-Because it's a module, not an integral part of the interpreter, NEXT.pm
+Because it's a module, not an integral part of the interpreter, C<NEXT>
 has to guess where the surrounding call was found in the method
 look-up sequence. In the presence of diamond inheritance patterns
 it occasionally guesses wrong.

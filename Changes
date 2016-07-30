@@ -1,5 +1,8 @@
 Revision history for Perl extension NEXT.pm
 
+0.67 2016-07-30 NEILB
+    - Changed all mentions of "NEXT.pm" in the doc to C<NEXT>.
+
 0.66 2016-07-28 NEILB
     - split the "package EVERY" statement across two lines to hide it
       from PAUSE and help with resolving a permissions conflict with "Every".
