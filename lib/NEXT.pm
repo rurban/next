@@ -201,34 +201,34 @@ NEXT - Provide a pseudo-class NEXT (et al) that allows method redispatch
 
     use NEXT;
 
-    package A;
-    sub A::method   { print "$_[0]: A method\n";   $_[0]->NEXT::method() }
-    sub A::DESTROY  { print "$_[0]: A dtor\n";     $_[0]->NEXT::DESTROY() }
+    package P;
+    sub P::method   { print "$_[0]: P method\n";   $_[0]->NEXT::method() }
+    sub P::DESTROY  { print "$_[0]: P dtor\n";     $_[0]->NEXT::DESTROY() }
 
-    package B;
-    use base qw( A );
-    sub B::AUTOLOAD { print "$_[0]: B AUTOLOAD\n"; $_[0]->NEXT::AUTOLOAD() }
-    sub B::DESTROY  { print "$_[0]: B dtor\n";     $_[0]->NEXT::DESTROY() }
+    package Q;
+    use base qw( P );
+    sub Q::AUTOLOAD { print "$_[0]: Q AUTOLOAD\n"; $_[0]->NEXT::AUTOLOAD() }
+    sub Q::DESTROY  { print "$_[0]: Q dtor\n";     $_[0]->NEXT::DESTROY() }
 
-    package C;
-    sub C::method   { print "$_[0]: C method\n";   $_[0]->NEXT::method() }
-    sub C::AUTOLOAD { print "$_[0]: C AUTOLOAD\n"; $_[0]->NEXT::AUTOLOAD() }
-    sub C::DESTROY  { print "$_[0]: C dtor\n";     $_[0]->NEXT::DESTROY() }
+    package R;
+    sub R::method   { print "$_[0]: R method\n";   $_[0]->NEXT::method() }
+    sub R::AUTOLOAD { print "$_[0]: R AUTOLOAD\n"; $_[0]->NEXT::AUTOLOAD() }
+    sub R::DESTROY  { print "$_[0]: R dtor\n";     $_[0]->NEXT::DESTROY() }
 
-    package D;
-    use base qw( B C );
-    sub D::method   { print "$_[0]: D method\n";   $_[0]->NEXT::method() }
-    sub D::AUTOLOAD { print "$_[0]: D AUTOLOAD\n"; $_[0]->NEXT::AUTOLOAD() }
-    sub D::DESTROY  { print "$_[0]: D dtor\n";     $_[0]->NEXT::DESTROY() }
+    package S;
+    use base qw( Q R );
+    sub S::method   { print "$_[0]: S method\n";   $_[0]->NEXT::method() }
+    sub S::AUTOLOAD { print "$_[0]: S AUTOLOAD\n"; $_[0]->NEXT::AUTOLOAD() }
+    sub S::DESTROY  { print "$_[0]: S dtor\n";     $_[0]->NEXT::DESTROY() }
 
     package main;
 
-    my $obj = bless {}, "D";
+    my $obj = bless {}, "S";
 
-    $obj->method();		# Calls D::method, A::method, C::method
-    $obj->missing_method(); # Calls D::AUTOLOAD, B::AUTOLOAD, C::AUTOLOAD
+    $obj->method();		# Calls S::method, P::method, R::method
+    $obj->missing_method(); # Calls S::AUTOLOAD, Q::AUTOLOAD, R::AUTOLOAD
 
-    # Clean-up calls D::DESTROY, B::DESTROY, A::DESTROY, C::DESTROY
+    # Clean-up calls S::DESTROY, Q::DESTROY, P::DESTROY, R::DESTROY
 
 
 
@@ -249,10 +249,10 @@ past the current class -- to look for a suitable method in other
 ancestors of C<$self> -- whereas C<$self-E<gt>SUPER::m()> cannot.
 
 A typical use would be in the destructors of a class hierarchy,
-as illustrated in the synopsis above. Each class in the hierarchy
+as illustrated in the SYNOPSIS above. Each class in the hierarchy
 has a DESTROY method that performs some class-specific action
 and then redispatches the call up the hierarchy. As a result,
-when an object of class D is destroyed, the destructors of I<all>
+when an object of class S is destroyed, the destructors of I<all>
 its parent classes are called (in depth-first, left-to-right order).
 
 Another typical use of redispatch would be in C<AUTOLOAD>'ed methods.
@@ -271,7 +271,7 @@ Note that it is a fatal error for any method (including C<AUTOLOAD>)
 to attempt to redispatch any method that does not have the
 same name. For example:
 
-        sub D::oops { print "oops!\n"; $_[0]->NEXT::other_method() }
+        sub S::oops { print "oops!\n"; $_[0]->NEXT::other_method() }
 
 
 =head2 Enforcing redispatch
