@@ -1,22 +1,27 @@
+use strict;
+use warnings;
 use Test::More tests => 6;
 
 BEGIN { use_ok('NEXT') };
 my $order = 0;
 
 package A;
-@ISA = qw/B C D/;
+
+our @ISA = qw/B C D/;
 use mro 'dfs';
+
 
 sub test { ::ok(++$order==1,"test A"); $_[0]->NEXT::UNSEEN::ACTUAL::test;}
 
 package B;
-@ISA = qw/D C/;
+our @ISA = qw/D C/;
 use mro 'dfs';
 sub test { ::ok(++$order==2,"test B"); $_[0]->NEXT::ACTUAL::UNSEEN::test;}
 
 package C;
-@ISA = qw/D/;
+our @ISA = qw/D/;
 use mro 'dfs';
+
 sub test { ::ok(++$order==4,"test C"); $_[0]->NEXT::UNSEEN::ACTUAL::test;}
 
 package D;
